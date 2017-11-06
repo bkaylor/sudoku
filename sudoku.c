@@ -13,8 +13,8 @@ struct Puzzle
     int pos[9][9];
 };
 
-bool isSolved(char *p);
 void initPuzzle(struct Puzzle *p, struct Data *d);
+bool isSolved(char *p);
 
 int main(int argc, char *argv[])
 {
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
             d.size = ftell(file);
             fseek(file, 0, SEEK_SET);
 
-            d.data = (char *) malloc(d.size+1);
+            d.data = malloc(d.size+1);
             fread(d.data, 1, d.size, file);
             d.data[d.size] = 0;
 
@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     }
 
     initPuzzle(&p, &d);
+    bruteForceSolve(&p);
 
     return 0;
 }
