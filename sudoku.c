@@ -14,6 +14,7 @@ struct Puzzle
 };
 
 void initPuzzle(struct Puzzle *p, struct Data *d);
+void bruteForceSolve(struct Puzzle *p);
 bool isSolved(char *p);
 
 int main(int argc, char *argv[])
@@ -67,6 +68,17 @@ void initPuzzle(struct Puzzle *p, struct Data *d)
             {
                 p->pos[i][j] = d->data[i+j];
             }
+        }
+    }
+}
+
+void bruteForceSolve(struct Puzzle *p)
+{
+    for (int i = 0; i < 9; ++i)
+    {
+        for (int j = 0; j < 9; ++j)
+        {
+            printf("%d", p->pos[i][j]);
         }
     }
 }
