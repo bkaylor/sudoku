@@ -8,9 +8,15 @@ struct Data
     int size;
 };
 
+struct Cell
+{
+    bool lock;
+    int value;
+};
+
 struct Puzzle 
 {
-    int pos[9][9];
+    struct Cell *cells[9][9];
 };
 
 void initPuzzle(struct Puzzle *p, struct Data *d);
@@ -64,9 +70,14 @@ void initPuzzle(struct Puzzle *p, struct Data *d)
     {
         for (int i = 0; i < 9; ++i)
         {
-            for (int j = 0; j < 9; ++j)
+            for (int j = 0; j < 10; ++j)
             {
-                p->pos[i][j] = d->data[i+j];
+                if (j != 10) // 10th byte is \n, skip.
+                {
+                    p->cells[i][j] = (struct Cell *) malloc(sizeof(struct Cell));
+                    p->cells[i][j]->value = d->data[i*10+j] - 48;
+                    p->cells[i][j]->lock = (p->cells[i][j]->value == 0) ? false : true;
+                }
             }
         }
     }
@@ -78,7 +89,9 @@ void bruteForceSolve(struct Puzzle *p)
     {
         for (int j = 0; j < 9; ++j)
         {
-            printf("%d", p->pos[i][j]);
+            printf("%d", p->cells[i][j]->value);
         }
+
+        printf("\n");
     }
 }
