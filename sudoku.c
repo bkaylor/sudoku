@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     } 
     else 
     {
-        FILE *file = fopen(argv[1], "r");
+        FILE *file = fopen(argv[1], "rb");
 
         if (file) 
         {
