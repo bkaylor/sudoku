@@ -1,4 +1,4 @@
-A sudoku solver in cpp.
+A sudoku solver in c/c++.
 Takes one input, a filename containing a sudoku puzzle.
 Examples provided.
 
